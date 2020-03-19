@@ -14,6 +14,6 @@ public class Company {
     private int companyId;
     private String companyName;
     private String title;
-    private Date startDate;
+    private String startDate;
     private Address address;
 }

@@ -1,68 +1,54 @@
-Feature: Creating a student
-Background:
-  Given the user is on the School Landing page
- Then the user should verify he is on the School main page
+@studentAPI
+Feature: Student API module
 
-Scenario: Verification of the ability to create a student
-  Given the user is on the Student's Module
-  When user should click on the add student button
-  And user should be able to see add students header
-  And user should verify Student Information header
-  When user store student's
-| FIRST_NAME        | Lionel          |
-| LAST_NAME         | Messi           |
-| EMAIL             | messi@gmail.com |
-| JOIN_DATE         | 01/01/2010      |
-| PASSWORD          | 123             |
-| SUBJECT           | Math            |
-| MOBILE_NUMBER     | 3124756521      |
-| GENDER            | Male            |
-| ADMISSION_NO      | 10              |
-| BIRTH_DATE        | 01/01/1990      |
-| MAJOR             | Football        |
-| BATCH             | 10              |
-| SECTION           | LaLigA          |
-| PREMANENT_ADDRESS | 921 W Huron St. |
-| COMPANY_NAME      | Barcelona       |
-| TITLE             | Goat            |
-| START_DATE        | 01/02/2010      |
-| CITY              | Barcelona       |
-| STREET            | Huron           |
-| ZIP_CODE          | 60742           |
-| STATE             | IL              |
+  Agile Story: User should be able to create/update and delete a student
 
-And user should enter student's information
-And user should click on the summit button
-And user should handle pop-up alert
-When user is on the All students page
-And user should search student by "name" on UI
-And user should click on the student profile
-And user should verify my profile header
-And user should verify "student_id" on UI
-And user should store added student information
-Then user should compare added student information with database
+  @createStudent
+  Scenario: Creating student with POST API
+    Given student is created with given values below
 
+      | firstName        | Lionelio          |
+      | lastName         | Messi           |
+      | emailAddress     | messi@gmail.com |
+      | joinDate         | 01/01/2010      |
+      | password         | 123jbr             |
+      | subject          | Math            |
+      | phone            | 3124756521      |
+      | gender           | Male            |
+      | admissionNo      | 10              |
+      | birthDate        | 01/01/1990      |
+      | major            | Football        |
+      | batch            | 10              |
+      | section          | LaLigA          |
+      | premanentAddress | 921 W Huron St. |
+      | companyName      | Barcelona       |
+      | title            | Goatie            |
+      | startDate        | 01/02/2010      |
+      | city             | Barcelona       |
+      | street           | 13 Hurnon           |
+      | zipCode          | 60742           |
+      | state            | IL              |
 
- Scenario: Verification of the ability to update a student
-    Given the user clicks and All Students and Edit button
-    When the user updates below fields with new data
+    Then verify created Student success status code "200"
+    And verify created Student response with Database
 
-      |FIRST_NAME         |           Phyliss                                       |
-      |LAST_NAME          |           Edelstein                                     |
-      |EMAIL_ADDRESS      |           koteague0@shutterfly.com                      |
-      |SUBJECT            |           Linear Algebra                                |
-      |PHONE              |           2061166182                                    |
-      |MAJOR              |           Calculus                                      |
-      |PREMANENT_ADDRESS  |           965 Nancy Center, Long Beach, CA 90847        |
-   Then the user should be able to see updated student info on website
-   Then the user should be able to see the updated student info in database
+  @updateStudent
+  Scenario: Updating student with PUT API
+    Given student is updated with given values below
 
-  Scenario: Verification of the ability to delete a student
-    Given the user clicks on Students dropdown menu
-    And the user chooses All Students option
-    And the user opens already created student
-    And the user clicks on 3 dots sign in top right corner of student's name
-    And the user clicks on delete option
-    And the user clicks on red Delete button
-    And the user sees that student removed from the All Students page (UI).
-    Then the user should be able to see that student removed from the database.
+      | firstName        | Henry                                  |
+      | lastName         | Ford                                   |
+      | emailAddress     | koteague0@shutterfly.com               |
+      | subject          | Intro to Science                       |
+      | phone            | 2061166182                             |
+      | major            | Pyhsics                                |
+      | premanentAddress | 965 Nancy Center, Long Beach, CA 90847 |
+
+    Then verify updated Student response with Database
+
+  @deleteStudent
+  Scenario: Deleting student with DELETE API
+
+    Given student is deleted with "studentID"
+    Then  verify deleted Student success status code "200"
+    And verify deleted Student response with Database
