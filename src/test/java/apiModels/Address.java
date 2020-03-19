@@ -1,5 +1,6 @@
 package apiModels;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @Data
 public class Address {
+
 
     private int addressId;
     private String street;

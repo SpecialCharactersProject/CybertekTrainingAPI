@@ -1,67 +1,56 @@
 package utilities;
 
-import apiModels.RequestBody;
-import apiModels.ResponseHandler;
+import apiModels.Teacher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
-import java.io.IOException;
-
 public class APIRunner {
 
-    private static ResponseHandler responseHandler;
+    private static Response responseHandler;
+    private static Response response;
+    private static ObjectMapper mapper = new ObjectMapper();
 
 
-    public static void runGET(String uri) {
 
-        Response response = RestAssured.get(uri);
-        System.out.println("STATUS " + response.statusCode());
-        System.out.println(response.asString());
-        ObjectMapper mapper = new ObjectMapper();
+    public static void runPOST(String url, Teacher requestBody){
 
-        try {
-            responseHandler = mapper.readValue(response.asString(), ResponseHandler.class);
-        } catch (IOException e) {
-            System.out.println("JSON WAS NOT MAPPED PROPERLY");
-        }
+        response = RestAssured.given().
+                contentType(ContentType.JSON).body(requestBody).when().post(url);
+        System.out.println("STATUS: "+response.statusCode());
 
     }
-    public static void runPOST(RequestBody body, String uri){
-        Response response=RestAssured.given().contentType(ContentType.JSON).body(body).post(uri);
-        System.out.println("STATUS " + response.statusCode());
-        System.out.println(response.asString());
-        ObjectMapper mapper = new ObjectMapper();
+    public static void runUPDATE(String url, Teacher requestBody){
 
-        try {
-            responseHandler = mapper.readValue(response.asString(), ResponseHandler.class);
-        } catch (IOException e) {
-            System.out.println("JSON WAS NOT MAPPED PROPERLY");
-        }
-
+        response = RestAssured.given().
+                contentType(ContentType.JSON).body(requestBody).when().put(url);
+        System.out.println("STATUS: "+response.statusCode());
 
     }
 
 
-    public static ResponseHandler getResponse(){
 
-        if(responseHandler==null){
-            System.out.println("Please run API first");
-            throw new RuntimeException();
-        }
-        return responseHandler;
-    }
-
-    public static void runDelete(String uri, int id){
-        Response response=RestAssured.given().contentType(ContentType.JSON).delete(uri+id);
-        System.out.println("STATUS " + response.statusCode());
-
-    }
-
-
+//    public static Object newObjectFromMap(Map<String, String> aMap)
+//    {
+//        try {
+//            ObjectMapper mapper = new ObjectMapper();
+//            TypeReference<HashMap<String, String>> mapRef = new TypeReference<HashMap<String, String>>() {
+//            };
+//            ObjectWriter ow = mapper.writerFor(mapRef);
+//            TypeReference<Student> studentRef = new TypeReference<Student>() {
+//            };
+//            return mapper.readValue(mapper.writeValueAsSt(aMap), studentRefring);
+//        } catch (Exception ex) {
+//            return null;
+////        }
+//
+//    }
 
 }
+
+
+
 
 
 

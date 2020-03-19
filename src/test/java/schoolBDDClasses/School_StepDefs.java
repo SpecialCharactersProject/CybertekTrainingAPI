@@ -1,4 +1,4 @@
-package step_definitions;
+package schoolBDDClasses;
 
 import com.google.common.collect.Sets;
 import cucumber.api.java.en.Given;

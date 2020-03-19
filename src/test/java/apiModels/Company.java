@@ -1,7 +1,9 @@
 package apiModels;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import lombok.Data;
 
 import java.sql.Date;
@@ -14,6 +16,7 @@ public class Company {
     private int companyId;
     private String companyName;
     private String title;
-    private Date startDate;
+    private String startDate;
+
     private Address address;
 }

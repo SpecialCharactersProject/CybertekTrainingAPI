@@ -1,5 +1,6 @@
 package apiModels;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -9,10 +10,12 @@ import lombok.Data;
 @Data
 public class Contact {
 
+
    private int contactId;
    private String phone;
    private String emailAddress;
    private String premanentAddress;
+
 
 
 }

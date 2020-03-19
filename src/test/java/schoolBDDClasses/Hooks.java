@@ -1,4 +1,4 @@
-package step_definitions;
+package schoolBDDClasses;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;

@@ -16,7 +16,7 @@ public class Config {
 
     static {           //static block bc we want this to run first
 
-        String path = "configuration.properties";              //creating the path; HERE YOU PUT WHICH PROPERTY YOU WANT TO USE
+        String path = "src/test/resources/configuration.properties";              //creating the path; HERE YOU PUT WHICH PROPERTY YOU WANT TO USE
 
         try {                                                    //handling the exception
             FileInputStream file = new FileInputStream(path);
